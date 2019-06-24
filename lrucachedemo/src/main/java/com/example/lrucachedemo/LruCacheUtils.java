@@ -2,7 +2,7 @@ package com.example.lrucachedemo;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.support.v4.util.LruCache;
 import android.widget.Toast;
 

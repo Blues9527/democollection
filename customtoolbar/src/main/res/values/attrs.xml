@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomToolBar">
+        <!--左中右文字-->
+        <attr name="leftText" format="reference|string" />
+        <attr name="rightText" format="reference|string" />
+        <attr name="titleText" format="reference|string" />
+
+        <!--左中右文字大小-->
+        <attr name="leftTextSize" format="dimension" />
+        <attr name="rightTextSize" format="dimension" />
+        <attr name="titleTextSize" format="dimension" />
+
+        <!--左中右文字颜色-->
+        <attr name="leftTextColor" format="color" />
+        <attr name="rightTextColor" format="color" />
+        <attr name="titleTextColor" format="color" />
+
+        <!--左中右图片-->
+        <attr name="leftIcon" format="reference" />
+        <attr name="rightIcon" format="reference" />
+        <attr name="midLogo" format="reference" />
+
+        <!--是否显示左右文字-->
+        <attr name="isShowLeftText" format="boolean" />
+        <attr name="isShowRightText" format="boolean" />
+
+        <!--背景颜色-->
+        <attr name="backgroundColor" format="color" />
+    </declare-styleable>
+
+</resources>

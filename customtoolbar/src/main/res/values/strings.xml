@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">customtoolbar</string>
+    <string name="left_text">返回</string>
+    <string name="right_text">关闭</string>
+    <string name="title_text">Title</string>
+</resources>

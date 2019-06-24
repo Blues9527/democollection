@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <com.example.customtoolbar.CustomToolBar
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:leftIcon="@mipmap/ic_back"
+        app:leftText="@string/left_text"
+        app:leftTextSize="11sp"
+        app:rightIcon="@mipmap/ic_close_white"
+        app:rightText="@string/right_text"
+        app:rightTextSize="11sp"
+        app:titleText="@string/title_text"
+        app:titleTextSize="12sp" />
+
+</LinearLayout>
