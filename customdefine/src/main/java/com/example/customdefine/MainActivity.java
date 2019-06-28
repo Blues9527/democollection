@@ -3,9 +3,9 @@ package com.example.customdefine;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.IntDef;
-import androidx.annotation.Nullable;
-import androidx.core.view.ViewPager;
+import android.support.annotation.IntDef;
+import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -76,15 +76,16 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(final int position) {
-                    if ( position < mDatas.size()) {
-                        startPlay(position + 1, SLEEP_TIME);
-                        Log.i("Blues", "==>1");
-                    }
-                    if (position == mDatas.size() - 1) {
-                        startPlay(0, SLEEP_TIME);
-                        Log.i("Blues", "==>2");
-                    }
+                if (position < mDatas.size()) {
+                    startPlay(position + 1, SLEEP_TIME);
+                    Log.i("Blues", "==>1");
                 }
+                if (position == mDatas.size() - 1) {
+                    startPlay(0, SLEEP_TIME);
+                    Log.i("Blues", "==>2");
+                }
+            }
+
             @Override
             public void onPageScrollStateChanged(int state) {
 

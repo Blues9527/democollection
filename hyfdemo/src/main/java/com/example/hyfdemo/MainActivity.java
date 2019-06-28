@@ -18,6 +18,16 @@ public class MainActivity extends AppCompatActivity {
                 .params2("str2")
                 .build();
 
-        Log.i(TAG, test.toString());
+//        Log.i(TAG, test.toString());
+
+        Test1 t1 = new Test1();
+        Test2 t2 = new Test2();
+
+        if (t1 instanceof TestInterface) {
+            Log.i("Blues", "t1 is right");
+        }
+        if (t2 instanceof TestInterface) {
+            Log.i("Blues", "t2 is right");
+        }
     }
 }
