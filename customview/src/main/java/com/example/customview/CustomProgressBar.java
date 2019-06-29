@@ -180,7 +180,7 @@ public class CustomProgressBar extends View {
     }
 
     public void setProgress(float progress) {
-        Log.i("Blues", "percent2 ==> " + progress);
+        sendLog("percent2 ==> " + progress);
         if (progress > 100)
             this.progress = max;
         else {
@@ -191,7 +191,10 @@ public class CustomProgressBar extends View {
 
     public float getProgress() {
         float percent = 360 * (max - progress) / max;
-        Log.i("Blues", "progress ==> " + percent);
+        if (percent > 360)
+            percent = 360;
+        percent = 360 - percent;
+        sendLog("progress ==> " + percent);
         return percent;
     }
 
@@ -202,5 +205,9 @@ public class CustomProgressBar extends View {
 
     int px2sp(float px) {
         return (int) (getResources().getDisplayMetrics().scaledDensity * px);
+    }
+
+    void sendLog(String msg) {
+        Log.i("Blues", msg);
     }
 }
