@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -28,6 +29,7 @@ public class CustomProgressBar extends View {
 
     private int max = 100;
 
+    //表示进度，值介于0~100之间
     private float progress = 0;
 
     private int radius = dp2px(15);
@@ -50,7 +52,7 @@ public class CustomProgressBar extends View {
     //倒计时字体大小
     private float countDownTextSize;
 
-    //progress宽度
+    //progressbar宽度
     private float strokeWidth;
 
     //倒计时
@@ -59,11 +61,18 @@ public class CustomProgressBar extends View {
     //形状,默认圆形
     private int progressShape;
 
+    private CountDownTimer countDownTimer;
+
+    private CountDownTimerCallBack mCallBack;
+
+    //倒计时间隔，默认1s
+    private long INTERVAL_DEFAULT = 1000;
+
     public CustomProgressBar(Context context) {
         this(context, null);
     }
 
-    public CustomProgressBar(Context context, @Nullable AttributeSet attrs) {
+    public CustomProgressBar(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
@@ -72,6 +81,8 @@ public class CustomProgressBar extends View {
         initAttrs(context, attrs);
         //抗锯齿
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+        startCountDown(countDownText * 1000, INTERVAL_DEFAULT);
     }
 
     private void initAttrs(Context context, AttributeSet attrs) {
@@ -139,7 +150,7 @@ public class CustomProgressBar extends View {
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(dp2px(strokeWidth));
         RectF oval = new RectF(centerX - radius, centerY - radius, radius + centerX, radius + centerY);
-        canvas.drawArc(oval, -90, getProgress(), false, paint);
+        canvas.drawArc(oval, -90, getAngle(), false, paint);
 
         if (showCountText) {
             paint.setStyle(Paint.Style.FILL);
@@ -167,6 +178,19 @@ public class CustomProgressBar extends View {
      */
     private void drawLinearProgressBar(Canvas canvas, Paint paint) {
 
+        paint.setColor(progressBgColor);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setStrokeWidth(dp2px(strokeWidth));
+
+        canvas.drawRoundRect(new RectF(0, 0, getWidth(), dp2px(strokeWidth)), 0, 0, paint);
+
+        paint.setColor(progressColor);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setStrokeWidth(dp2px(strokeWidth));
+
+        canvas.drawRoundRect(new RectF(0, 0, getProgress() / 100 * getWidth(), dp2px(strokeWidth)), 0, 0, paint);
+
+
     }
 
     /**
@@ -179,8 +203,12 @@ public class CustomProgressBar extends View {
         postInvalidate();
     }
 
+    /**
+     * 设置进度，用于更新progressbar进度
+     *
+     * @param progress
+     */
     public void setProgress(float progress) {
-        sendLog("percent2 ==> " + progress);
         if (progress > 100)
             this.progress = max;
         else {
@@ -190,14 +218,81 @@ public class CustomProgressBar extends View {
     }
 
     public float getProgress() {
+        return progress;
+    }
+
+    /**
+     * 获取进度，用于圆形progressbar去设置进度
+     */
+    public float getAngle() {
         float percent = 360 * (max - progress) / max;
         if (percent > 360)
             percent = 360;
         percent = 360 - percent;
-        sendLog("progress ==> " + percent);
         return percent;
     }
 
+    /**
+     * 开启倒计时,圆形倒计时progressbar需要用到
+     */
+    public void startCountDown(long millisInFuture, long countDownInterval) {
+        countDownTimer = new CountDownTimerImpl(millisInFuture, countDownInterval);
+        countDownTimer.start();
+    }
+
+    /**
+     * onResume时候开启倒计时
+     */
+    public void countDownResume() {
+        if (countDownTimer != null) {
+            countDownTimer.start();
+        }
+    }
+
+    /**
+     * onStop或者是onPause的时候取消倒计时
+     */
+    public void countDownCancel() {
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+        }
+    }
+
+    private class CountDownTimerImpl extends CountDownTimer {
+
+        private long millisInFuture;
+
+        private CountDownTimerImpl(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+            this.millisInFuture = millisInFuture;
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            setCountDownText((int) (millisUntilFinished / 1000));
+            setProgress((float) (millisUntilFinished - 1000) / millisInFuture * 100);
+        }
+
+        @Override
+        public void onFinish() {
+            if (getCountDownTimerCallBack() != null)
+                getCountDownTimerCallBack().onFinish();
+        }
+    }
+
+    public interface CountDownTimerCallBack {
+        void onFinish();
+    }
+
+    public void setCountDownTimerCallBack(CountDownTimerCallBack callBack) {
+        mCallBack = callBack;
+    }
+
+    public CountDownTimerCallBack getCountDownTimerCallBack() {
+        return mCallBack;
+    }
+
+    // --------------工具方法-------------------//
 
     int dp2px(float dp) {
         return (int) (getResources().getDisplayMetrics().density * dp);
