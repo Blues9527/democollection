@@ -6,38 +6,43 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    private CustomProgressBar cpb;
+//    private CustomProgressBar cpb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        cpb = findViewById(R.id.cpb);
-        cpb.setCountDownTimerCallBack(new CustomProgressBar.CountDownTimerCallBack() {
-            @Override
-            public void onFinish() {
-                cpb.setVisibility(View.GONE);
-            }
-        });
+        ExplosionField explosionField = new ExplosionField(MainActivity.this, new FallingParticleFactory());
+        explosionField.addListener(findViewById(R.id.iv_test));
+
+//        cpb = findViewById(R.id.cpb);
+//        cpb.setCountDownTimerCallBack(new CustomProgressBar.CountDownTimerCallBack() {
+//            @Override
+//            public void onFinish() {
+//                ExplosionField explosionField = new ExplosionField(MainActivity.this, new FallingParticleFactory());
+//                explosionField.addListener(cpb);
+////                cpb.setVisibility(View.GONE);
+//            }
+//        });
     }
 
     @Override
     protected void onResume() {
-        cpb.countDownResume();
+//        cpb.countDownResume();
         super.onResume();
     }
 
     @Override
     protected void onPause() {
-        cpb.countDownCancel();
+//        cpb.countDownCancel();
         super.onPause();
     }
 
     @Override
     protected void onDestroy() {
-        cpb.countDownCancel();
+//        cpb.countDownCancel();
         super.onDestroy();
-        System.gc();
+//        System.gc();
     }
 }
