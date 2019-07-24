@@ -1,10 +1,9 @@
 package com.example.lrucachedemo;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
-import androidx.annotation.NonNull;
+import android.support.annotation.NonNull;
 import android.support.v4.util.LruCache;
-import android.widget.Toast;
+import android.util.Log;
 
 /**
  * User : Blues
@@ -13,11 +12,10 @@ import android.widget.Toast;
  */
 
 public class LruCacheUtils {
+    private final String TAG = getClass().getSimpleName();
     private LruCache<String, Bitmap> lruCache;
-    private Activity mActivity;
 
-    public LruCacheUtils(Activity mActivity) {
-        this.mActivity = mActivity;
+    public LruCacheUtils() {
         int cacheMemory = (int) (Runtime.getRuntime().maxMemory() / 8);
         lruCache = new LruCache<String, Bitmap>(cacheMemory) {
             @Override
@@ -35,14 +33,10 @@ public class LruCacheUtils {
      */
     public void addBitmapToLruCache(String key, Bitmap bitmap) {
         if (getBitmapFormLruCache(key) == null) {
+            Log.d(TAG, "add bitmap to lrucache , key is " + key);
             lruCache.put(key, bitmap);
         } else {
-            mActivity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(mActivity, "bitmap already exit!", Toast.LENGTH_SHORT).show();
-                }
-            });
+            Log.d(TAG, "bitmap cache already exist!");
         }
     }
 

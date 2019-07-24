@@ -24,9 +24,15 @@ public class FallingParticle extends Particle {
 
     }
 
+    /**
+     * 控制cx cy达到粒子爆炸时散落的轨迹
+     */
     @Override
     protected void calculate(float factor) {
-        cx += factor * Utils.RANDOM.nextInt(mRect.width()) * ((Utils.RANDOM.nextFloat() - 0.5f));
+        //往侧边飘
+//        cy += factor * Utils.RANDOM.nextInt(mRect.width()) * ((Utils.RANDOM.nextFloat() - 0.5f));
+//        cx += factor * Utils.RANDOM.nextInt(mRect.height() / 2);
+        cx += 2 * factor * Utils.RANDOM.nextInt(mRect.width()) * ((Utils.RANDOM.nextFloat() - 0.5f));
         cy += factor * Utils.RANDOM.nextInt(mRect.height() / 2);
         radius -= factor * Utils.RANDOM.nextInt(2);
         alpha = (1f - factor) * (Utils.RANDOM.nextFloat() + 1);
