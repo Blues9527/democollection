@@ -33,7 +33,6 @@ public class TextClockView extends View {
 
     private Paint mPaint;
     private Paint mHelperPaint;
-    private Calendar mCalendar;
 
     private Paint.FontMetrics fontMetrics;
 
@@ -51,23 +50,20 @@ public class TextClockView extends View {
     public TextClockView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
-        mPaint = createPaint(null, 0);
-        mHelperPaint = createPaint(null, Color.RED);
-        fontMetrics = new Paint.FontMetrics();
     }
 
+    /**
+     * 初始化
+     */
     public void init() {
-        mCalendar = Calendar.getInstance();
-
         mAnimator = ValueAnimator.ofFloat(6f, 0f);
         mAnimator.setDuration(150);
         mAnimator.setInterpolator(new LinearInterpolator());
+        mPaint = createPaint(0);
+        mHelperPaint = createPaint(Color.RED);
+        fontMetrics = new Paint.FontMetrics();
+        //刷新
         doInvalidate();
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     //在layout方法中计算view去除padding后的宽高
@@ -106,23 +102,23 @@ public class TextClockView extends View {
 
     //绘制中心信息
     private void drawCenterInfo(Canvas canvas) {
-        int hour = mCalendar.get(Calendar.HOUR_OF_DAY);
-        int minute = mCalendar.get(Calendar.MINUTE);
+        int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        int minute = Calendar.getInstance().get(Calendar.MINUTE);
 
         mPaint.setTextSize(mHourR * 0.4f);
         mPaint.setAlpha(255);
         mPaint.setTextAlign(Paint.Align.CENTER);
         canvas.drawText(String.format("%s:%s", hour, minute), 0f, getBottomedY(), mPaint);
 
-        String month = String.valueOf(mCalendar.get(Calendar.MONTH) + 1);
+        String month = String.valueOf(Calendar.getInstance().get(Calendar.MONTH) + 1);
 
         if (Integer.parseInt(month) < 10) {
             month = String.format("0%s", month);
         }
 
-        int day = mCalendar.get(Calendar.DAY_OF_MONTH);
+        int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 
-        String dayOfWeek = toText(mCalendar.get((Calendar.DAY_OF_WEEK)) - 1);
+        String dayOfWeek = toText(Calendar.getInstance().get((Calendar.DAY_OF_WEEK)) - 1);
 
         mPaint.setTextSize(mHourR * 0.16f);
         mPaint.setAlpha(255);
@@ -181,7 +177,7 @@ public class TextClockView extends View {
      * 绘制秒
      */
     private void drawSecond(Canvas canvas, float degrees) {
-        mPaint.setTextSize(mHourR * 0.16f);
+        mPaint.setTextSize(mHourR * 0.2f);
 
         //处理整体旋转
         canvas.save();
@@ -209,24 +205,22 @@ public class TextClockView extends View {
     /**
      * 创建一个画笔
      *
-     * @param colorStr
      * @param color
      */
-    private Paint createPaint(@Nullable String colorStr, int color) {
+    private Paint createPaint(int color) {
 
         color = color == 0 ? Color.WHITE : color;
-
         Paint mPaint = new Paint();
-        mPaint.setColor(colorStr != null ? Color.parseColor(colorStr) : color);
+        mPaint.setColor(color);
         mPaint.setAntiAlias(true);
         mPaint.setStyle(Paint.Style.FILL);
         return mPaint;
     }
 
     public void doInvalidate() {
-        int hour = mCalendar.get(Calendar.HOUR);
-        final int minute = mCalendar.get(Calendar.MINUTE);
-        final int second = mCalendar.get(Calendar.SECOND);
+        int hour = Calendar.getInstance().get(Calendar.HOUR);
+        final int minute = Calendar.getInstance().get(Calendar.MINUTE);
+        final int second = Calendar.getInstance().get(Calendar.SECOND);
 
         mHourDeg = -360 / 12f * (hour - 1);
         mMinuteDeg = -360 / 60f * (minute - 1);
