@@ -21,11 +21,11 @@ import java.util.TimerTask;
 
 /**
  * User : Blues
- * Date : 2019/7/24
- * Time : 10:16
+ * Date : 2019/7/25
+ * Time : 15:24
  */
 
-public class TextClockView extends View {
+public class TextClockExtendView extends View {
 
     private final String TAG = this.getClass().getSimpleName();
 
@@ -47,15 +47,15 @@ public class TextClockView extends View {
 
     private Timer mTimer;
 
-    public TextClockView(Context context) {
+    public TextClockExtendView(Context context) {
         this(context, null);
     }
 
-    public TextClockView(Context context, @Nullable AttributeSet attrs) {
+    public TextClockExtendView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public TextClockView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public TextClockExtendView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
@@ -86,8 +86,8 @@ public class TextClockView extends View {
         mHeight = getMeasuredHeight() - getPaddingTop() - getPaddingBottom();
 
         mHourR = mWidth * 0.143f;
-        mMinuteR = mWidth * 0.315f;
-        mSecondR = mWidth * 0.425f;
+        mMinuteR = mWidth * 0.312f;
+        mSecondR = mWidth * 0.35f;
     }
 
     @Override
@@ -147,11 +147,6 @@ public class TextClockView extends View {
         mPaint.setTextSize(mHourR * 0.16f);
         mPaint.setAlpha(255);
         mPaint.setTextAlign(Paint.Align.CENTER);
-        canvas.drawText("点", mWidth * 0.225f, getCenteredY(mPaint), mPaint);
-
-        mPaint.setTextSize(mHourR * 0.16f);
-        mPaint.setAlpha(255);
-        mPaint.setTextAlign(Paint.Align.CENTER);
         canvas.drawText("分", mWidth * 0.33f, getCenteredY(mPaint), mPaint);
 
         mPaint.setTextSize(mHourR * 0.2f);
@@ -174,7 +169,7 @@ public class TextClockView extends View {
 
             mPaint.setAlpha((iDeg + degrees == 0f) ? 255 : (int) (0.6f * 255));
             mPaint.setTextAlign(Paint.Align.LEFT);
-            canvas.drawText(String.format("%s", toText(i + 1)), mHourR, getCenteredY(mPaint), mPaint);
+            canvas.drawText(String.format("%s点", toText(i + 1)), mHourR, getCenteredY(mPaint), mPaint);
             canvas.restore();
         }
         canvas.restore();
@@ -200,9 +195,10 @@ public class TextClockView extends View {
 
             if (i < 59) {
                 canvas.drawText(String.format("%s", toText(i + 1)), mMinuteR, getCenteredY(mPaint), mPaint);
-            } else {
-                canvas.drawText("整", mMinuteR, getCenteredY(mPaint), mPaint);
             }
+//            else {
+//                canvas.drawText("整", mMinuteR, getCenteredY(mPaint), mPaint);
+//            }
             canvas.restore();
         }
 
@@ -226,13 +222,15 @@ public class TextClockView extends View {
             canvas.rotate(iDeg);
 
             mPaint.setAlpha((iDeg + degrees == 0f) ? 255 : (int) (0.6f * 255));
-            mPaint.setTextAlign(Paint.Align.RIGHT);
+            mPaint.setTextAlign(Paint.Align.LEFT);
+            mPaint.setColor(RandomColorUtil.getRandomColor());
 
             if (i < 59) {
                 canvas.drawText(String.format("%s", toText(i + 1)), mSecondR, getCenteredY(mPaint), mPaint);
-            } else {
-                canvas.drawText("整", mSecondR, getCenteredY(mPaint), mPaint);
             }
+//            else {
+//                canvas.drawText("整", mSecondR, getCenteredY(mPaint), mPaint);
+//            }
             canvas.restore();
         }
         canvas.restore();
