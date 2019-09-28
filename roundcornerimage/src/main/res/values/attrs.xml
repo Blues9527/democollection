@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="RoundCornerImage">
+        <attr name="radius_all" format="dimension" />
+        <attr name="radius_left_top" format="dimension" />
+        <attr name="radius_left_bottom" format="dimension" />
+        <attr name="radius_right_top" format="dimension" />
+        <attr name="radius_right_bottom" format="dimension" />
+        <attr name="image_src" format="reference" />
+    </declare-styleable>
+</resources>

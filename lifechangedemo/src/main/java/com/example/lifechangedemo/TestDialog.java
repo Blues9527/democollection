@@ -4,8 +4,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 /**
  * User : Blues
@@ -25,6 +25,8 @@ public class TestDialog extends Dialog {
 
     protected TestDialog(@NonNull Context context, boolean cancelable, @Nullable DialogInterface.OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
+        setCancelable(false);
+        setCanceledOnTouchOutside(false);
     }
 
     @Override

@@ -9,8 +9,16 @@ import android.util.Log;
  */
 
 public class Test2 {
+    public static final String TAG = "Blues";
 
     public Test2() {
-        Log.i("Blues", "this is test2");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.i("Blues", "this is test2");
+            }
+        }).start();
     }
+
+
 }
