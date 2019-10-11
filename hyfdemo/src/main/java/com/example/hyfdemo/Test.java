@@ -1,49 +1,40 @@
 package com.example.hyfdemo;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import java.io.File;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 /**
  * User : Blues
- * Date : 2019/5/24
- * Time : 09:54
+ * Date : 2019/10/9
+ * Time : 18:18
  */
 
 public class Test {
 
-    private String arg1, arg2;
+    public static void main(String[] args) {
+        String path = "D:\\test\\test.htm";
 
-    private Test(Builder builder) {
-        this.arg1 = builder.arg1;
-        this.arg2 = builder.arg2;
-    }
+        try {
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document doc = builder.parse(new File(path));
+            Node resources = doc.getFirstChild();
+            NodeList elements = resources.getChildNodes();
 
-    public String arg1() {
-        return arg1;
-    }
-
-    public String arg2() {
-        return arg2;
-    }
-
-    public static class Builder {
-        String arg1, arg2;
-
-        public Builder params1(String arg1) {
-            this.arg1 = arg1;
-            return this;
+            for (int i = 0; i < elements.getLength(); i++) {
+                Node element = elements.item(i);
+                if (element.getNodeType() == Node.ELEMENT_NODE) {
+                    String nodeName = element.getNodeName();
+                    System.out.println(nodeName);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        public Builder params2(String arg2) {
-            this.arg2 = arg2;
-            return this;
-        }
-
-        public Test build() {
-            return new Test(this);
-        }
-
-    }
-
-    @Override
-    public String toString() {
-        return "args1: " + this.arg1 + " arg2: " + this.arg2;
     }
 }

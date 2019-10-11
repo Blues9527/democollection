@@ -37,6 +37,6 @@
 //include ':weakreferrencedemo'
 //include  ':socketdemo'
 //include ':launchmodedemo',
-include ':leetcodetest'
+//include ':leetcodetest'
 //include ':shareelementdemo'
 //include ':volley-master'
