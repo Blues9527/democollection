@@ -11,18 +11,7 @@ import java.util.Arrays;
 public class Solution {
 
     public static void main(String[] args) {
-//        int[] nums = {2, 3, 2, 4, 5, 5, 6};
-//        twoSum(nums, 5);
-//        System.out.println(removeElement(nums, 1));
 
-//        System.out.println(strStr("aaaaa", "bba"));
-//        System.out.println(isPalindrome(1010));
-//        System.out.println(reverse(321));
-
-        int[] nums = {1, 2, 3, 9};
-//        System.out.println(firstMissingPositive(nums));
-
-        plusOne(nums);
     }
 
     //
@@ -45,7 +34,6 @@ public class Solution {
      *
      * @param haystack
      * @param needle
-     * @return
      */
     public static int strStr(String haystack, String needle) {
         if (needle.isEmpty()) {
@@ -102,7 +90,6 @@ public class Solution {
      * 正数反转
      *
      * @param x
-     * @return
      */
     public static int reverse(int x) {
         if (x >= 0) {
@@ -127,7 +114,6 @@ public class Solution {
      * 给定一个未排序的整数数组，找出其中没有出现的最小的正整数。
      *
      * @param nums
-     * @return
      */
     public static int firstMissingPositive(int[] nums) {
         Arrays.sort(nums);
@@ -173,4 +159,90 @@ public class Solution {
 //    public static int[] plusOne(int[] digits) {
 //
 //    }
+
+    /**
+     * 给定数组和目标数，找出索引，如果没有，则返回插入时对应的下标
+     *
+     * @param nums
+     * @param target
+     */
+    public static int searchInsert(int[] nums, int target) {
+
+        int len = nums.length;
+        int start = 0;
+        int end = nums.length - 1;
+
+        if (len != 0) {
+            while (start <= end) {
+
+                int mid = (start + end) >>> 1;
+                int midValue = nums[mid];
+
+                if (midValue < target) {
+                    start = mid + 1;
+                } else if (midValue > target) {
+                    end = mid - 1;
+                } else {
+                    return mid;
+                }
+            }
+        } else {
+            return 0;
+        }
+        return start;
+    }
+
+    /**
+     * 找出 最大能拼成 balloon的个数
+     * 思路：字母个数
+     *
+     * @param text 指定的字符串
+     */
+    public static int maxNumberOfBalloons(String text) {
+
+        int bNum = 0;
+        int aNum = 0;
+        int lNum = 0;
+        int oNum = 0;
+        int nNum = 0;
+
+        char[] array = text.toCharArray();
+
+        for (char c : array) {
+            switch (String.valueOf(c)) {
+                case "b":
+                    bNum++;
+                    break;
+                case "a":
+                    aNum++;
+                    break;
+                case "l":
+                    lNum++;
+                    break;
+                case "o":
+                    oNum++;
+                    break;
+                case "n":
+                    nNum++;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        System.out.println("b: " + bNum + " a: " + aNum + " l: " + lNum + " o: " + oNum + " n: " + nNum);
+
+        int single = Math.min(Math.min(bNum, aNum), nNum);
+        int doub = Math.min(lNum, oNum);
+
+        if (single < 1 || doub < 2) {
+            return 0;
+        }
+
+        if (2 * single > doub) {
+            return doub >>> 1;
+        } else {
+            return single;
+        }
+    }
 }
