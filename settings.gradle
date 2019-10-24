@@ -1,3 +1,4 @@
+//include ':spdemo'
 //include ':kotlindemo'
 //include ':hupureplydemo'
 //include ':cardviewdemo'
@@ -6,7 +7,8 @@
 //include ':textcolordemo'
 //include ':circleview', ':livedata'
 //include ':customtoolbar'
-//include ':hyfdemo', ':encrypdemo'
+include ':hyfdemo'
+//        include':encrypdemo'
 //include ':rxjavademo'
 //include ':endlessbanner'
 //include ':ijkplayerdemo'
@@ -38,6 +40,6 @@
 //include ':weakreferrencedemo'
 //include  ':socketdemo'
 //include ':launchmodedemo',
-include ':leetcodetest'
+//include ':leetcodetest'
 //include ':shareelementdemo'
 //include ':volley-master'
