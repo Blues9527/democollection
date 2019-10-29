@@ -25,6 +25,8 @@ public class TestDialog extends Dialog {
 
     protected TestDialog(@NonNull Context context, boolean cancelable, @Nullable DialogInterface.OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
+        setCancelable(false);
+        setCanceledOnTouchOutside(false);
     }
 
     @Override

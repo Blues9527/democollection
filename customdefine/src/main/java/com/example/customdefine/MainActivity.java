@@ -76,15 +76,16 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(final int position) {
-                    if ( position < mDatas.size()) {
-                        startPlay(position + 1, SLEEP_TIME);
-                        Log.i("Blues", "==>1");
-                    }
-                    if (position == mDatas.size() - 1) {
-                        startPlay(0, SLEEP_TIME);
-                        Log.i("Blues", "==>2");
-                    }
+                if (position < mDatas.size()) {
+                    startPlay(position + 1, SLEEP_TIME);
+                    Log.i("Blues", "==>1");
                 }
+                if (position == mDatas.size() - 1) {
+                    startPlay(0, SLEEP_TIME);
+                    Log.i("Blues", "==>2");
+                }
+            }
+
             @Override
             public void onPageScrollStateChanged(int state) {
 

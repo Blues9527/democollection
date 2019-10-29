@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ZoomAnim" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/in_anim</item>
+        <item name="android:windowExitAnimation">@anim/out_amin</item>
+    </style>
+
 </resources>

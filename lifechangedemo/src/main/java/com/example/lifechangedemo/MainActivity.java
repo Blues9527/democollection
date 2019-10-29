@@ -2,15 +2,13 @@ package com.example.lifechangedemo;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Button;
 
 public class MainActivity extends Activity {
 
@@ -21,7 +19,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.i(TAG, "onCreate");
+        Log.i(TAG, "MainActivity  --  onCreate()");
 
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,28 +52,28 @@ public class MainActivity extends Activity {
 
     }
 
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        Log.i(TAG, "onRestoreInstanceState");
-    }
+//    @Override
+//    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+//        super.onRestoreInstanceState(savedInstanceState);
+//        Log.i(TAG, "onRestoreInstanceState");
+//    }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Log.i(TAG, "onStart");
+        Log.i(TAG, "MainActivity  --  onStart()");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.i(TAG, "onResume");
+        Log.i(TAG, "MainActivity  --  onResume()");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.i(TAG, "onPause");
+        Log.i(TAG, "MainActivity  --  onPause()");
     }
 
     @Override
@@ -85,26 +83,36 @@ public class MainActivity extends Activity {
     }
 
     @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState, PersistableBundle persistentState) {
+        super.onRestoreInstanceState(savedInstanceState, persistentState);
+        Log.i(TAG, "onRestoreInstanceState");
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
-        Log.i(TAG, "onStop");
+        Log.i(TAG, "MainActivity  --  onStop()");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.i(TAG, "onRestart");
+        Log.i(TAG, "MainActivity  --  onRestart()");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.i(TAG, "onDestroy");
+        Log.i(TAG, "MainActivity  --  onDestroy()");
     }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        Log.i(TAG, "onConfigurationChanged");
+//    @Override
+//    public void onConfigurationChanged(Configuration newConfig) {
+//        super.onConfigurationChanged(newConfig);
+//        Log.i(TAG, "onConfigurationChanged");
+//    }
+
+    public void ClickToThirdActivity(View view) {
+        startActivity(new Intent(this, ThirdActivity.class));
     }
 }

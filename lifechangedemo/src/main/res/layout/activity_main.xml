@@ -19,6 +19,13 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:text="click to intent to second activty" />
+    <Button
+        android:onClick="ClickToThirdActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="click to intent to Third Activity" />
 
     <Button
         android:id="@+id/button2"

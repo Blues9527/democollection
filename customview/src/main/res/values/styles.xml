@@ -8,4 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CustomProgress">
+        <item name="android:indeterminateDrawable">@drawable/custom_progress</item>
+        <item name="android:maxWidth">80dp</item>
+        <item name="android:maxHeight">80dp</item>
+        <item name="android:minHeight">25dp</item>
+        <item name="android:minWidth">25dp</item>
+    </style>
+
 </resources>

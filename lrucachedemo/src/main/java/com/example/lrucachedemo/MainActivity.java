@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         final ImageView iv1 = findViewById(R.id.imageview1);
         final ImageView iv2 = findViewById(R.id.imageview2);
 
-        utils = new LruCacheUtils(MainActivity.this);
+        utils = new LruCacheUtils();
 
         findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != utils.getBitmapFormLruCache("bitmap")) {
+                if (null != utils.getBitmapFormLruCache(url)) {
                     Log.i(TAG, "从缓存中获取图片");
-                    iv2.setImageBitmap(utils.getBitmapFormLruCache("bitmap"));
+                    iv2.setImageBitmap(utils.getBitmapFormLruCache(url));
                 } else {
                     Toast.makeText(MainActivity.this, "缓存中没有图片", Toast.LENGTH_SHORT).show();
                 }
@@ -47,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (utils.getBitmapFormLruCache("bitmap") != null) {
-            utils.removeBitmapFromLruCache("bitmap");
-//            utils.getBitmapFormLruCache("bitmap").recycle();
+        if (utils.getBitmapFormLruCache(url) != null) {
+            utils.removeBitmapFromLruCache(url);
+//            utils.getBitmapFormLruCache(url).recycle();
         }
     }
 }
