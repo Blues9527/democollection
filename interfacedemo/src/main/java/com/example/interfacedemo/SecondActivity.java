@@ -2,7 +2,7 @@ package com.example.interfacedemo;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * User : Blues

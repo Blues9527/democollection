@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 
-public class CutomTextview extends android.support.v7.widget.AppCompatTextView {
+public class CutomTextview extends androidx.appcompat.widget.AppCompatTextView {
 
     public CutomTextview(Context context) {
         this(context, null);

@@ -1,6 +1,6 @@
 package com.example.nicevideoplayerdemo;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.xiao.nicevideoplayer.NiceVideoPlayerManager;
 

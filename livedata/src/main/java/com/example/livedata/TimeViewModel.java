@@ -1,7 +1,7 @@
 package com.example.livedata;
 
-import android.arch.lifecycle.ViewModel;
-import android.support.annotation.Nullable;
+import androidx.lifecycle.ViewModel;
+import androidx.annotation.Nullable;
 
 /**
  * User : Blues

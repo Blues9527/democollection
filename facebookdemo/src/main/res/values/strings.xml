@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">facebookdemo</string>
+    <string name="facebook_app_id">557139641700202</string> <string name="fb_login_protocol_scheme">fb557139641700202</string>
+    <string name="server_client_id">1048290745777-docof44jtkdsl36gc4295o0dbb8kcis5.apps.googleusercontent.com</string>
+</resources>
